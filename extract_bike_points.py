@@ -4,7 +4,7 @@ import requests
 import time
 
 # define url and API response variables
-url = f"https://api.tfl.gov.uk/BikePointr"
+url = f"https://api.tfl.gov.uk/BikePoint"
 response = requests.get(url)
 
 current_try = 0
