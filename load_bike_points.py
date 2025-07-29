@@ -16,9 +16,11 @@ def load_bike_points():
     )
 
     print('Load script initializing...')
-    # Find the first file in the data folder. There should only ever be one at a time.
+    # Finds one file from the data folder. Makes the data folder if it doesn't exist. 
+    data_dir = 'data'
+    os.makedirs(data_dir, exist_ok=True)
     try:
-        for file in os.listdir('data'):
+        for file in os.listdir(data_dir):
             if file[-5:] == '.json':
                 filename = file
                 print(f'Found file: {filename} in data folder.')
