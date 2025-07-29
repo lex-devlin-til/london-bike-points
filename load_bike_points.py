@@ -15,10 +15,11 @@ def load_bike_points():
                 aws_secret_access_key = aws_secret
     )
 
+    print('Load script initializing...')
     # Find the first file in the data folder. There should only ever be one at a time.
     try:
         filename = os.listdir('data')[0]
-        print(f'Found file: {filename}')
+        print(f'Found file: {filename} in data folder.')
     except:
         print('There was an error finding the file.')
 
