@@ -1,0 +1,34 @@
+# Basic script that schedules extract and load of bike point data via main.py script
+
+name: Bike Point Ingestion
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+  
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: secrets
+    steps:
+      - name: checkout the repo # any commits made will not affect this run
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: install packages
+        run: pip install -r requirements.txt
+
+      - name: run python script
+        env:
+          aws_access: ${{secrets.ACCESS_KEY}}
+          aws_secret: ${{secrets.SECRET_KEY}}
+          bucket: ${{secrets.S3_BUCKET}}
+        run: python main.py
